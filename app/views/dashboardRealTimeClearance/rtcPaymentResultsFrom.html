@@ -1,0 +1,31 @@
+<div class="col-md-12">
+    <table class="table table-striped">
+        <thead><strong>From :</strong>
+        <tr class="bg-info">
+            <th>Reference Nr</th>
+            <th>BPID</th>
+            <th>Acc From</th>
+            <th>Acc Name</th>
+            <th>Card Nr</th>
+            <th>Amount</th>
+            <th>Contact Nr</th>
+            <th>Customer Nr</th>
+            <th>Notification</th>
+            <th>Date/Time</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <td>{{rtcController.paymentSearchResults.interchangeId}}</td>
+        <td>{{rtcController.paymentSearchResults.customerBPID}}</td>
+        <td>{{rtcController.paymentSearchResults.accountFrom}}</td>
+        <td>{{rtcController.paymentSearchResults.accountName}}</td>
+        <td>{{rtcController.paymentSearchResults.cardNumber}}</td>
+        <td>{{rtcController.paymentSearchResults.amount | currency : "R" : 2}}</td>
+        <td>{{rtcController.paymentSearchResults.cellNumber}}</td>
+        <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;">{{rtcController.paymentSearchResults.customerRef}}</td>
+        <td>{{rtcController.paymentSearchResults.notificationRequired}}</td>
+        <td>{{rtcController.paymentSearchResults.reqTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        </tbody>
+    </table>
+</div>

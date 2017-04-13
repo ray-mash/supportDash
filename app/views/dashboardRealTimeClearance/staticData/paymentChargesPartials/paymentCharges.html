@@ -1,0 +1,20 @@
+<div class="col-md-7">
+    <table class="table table-bordered top15">
+        <thead>
+        <tr class="bg-info">
+            <th>Description</th>
+            <th>Value</th>
+            <th class="col-sm-1" ng-show="staticController.userAccessRights === 'ROLE_READWRITE_USER'">Edit</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <td id="description">{{staticController.paymentCharges.description}}</td>
+        <td id="value">{{staticController.paymentCharges.value  | currency : "R " : 2}}</td>
+        <td id="editPaymentChargeBtn" class="col-xs-1" ng-show="staticController.userAccessRights === 'ROLE_READWRITE_USER'"
+        ng-click="staticController.openModalForEditPaymentCharge(staticController.paymentCharges.value)">
+            <a><i class="glyphicon glyphicon-pencil"></i>edit</a></td>
+        </tbody>
+
+    </table>
+</div>

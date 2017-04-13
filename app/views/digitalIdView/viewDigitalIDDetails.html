@@ -1,0 +1,89 @@
+<div data-ng-init="init()">
+    <ol id="viewDIBreadCrumb" class="breadcrumb text-center lBlue">
+    <li><a href="/dashboard">Search Selection</a></li>
+    <li href="#" class="active">View Digital ID Details</li>
+    </ol>
+    <div class="container">
+    <div class="row row-centered">
+        <div ng-show="errorMessage" id="searchFormError" class="panel-primary alert alert-danger">
+            <strong>{{errorMessage}}</strong>
+        </div>
+        <h4 id="dIDUserName">Details for: {{userDetails.userName}}</h4>
+        <h4 id="dIPreferredName">Preferred Name: {{userDetails.preferredName}}</h4>
+        <div>
+            <div class="col-centered">
+                <form class="form-horizontal" role="form" name="viewForm">
+                    <div>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="bg-info">
+                                <th>ID</th>
+                                <th>Last Login</th>
+                                <th>Registration Date</th>
+                                <th>Password Count</th>
+                                <th>Registration Channel</th>
+                                <th>Status</th>
+                                <th>De/activate Action</th>
+                                <th>Disabled Status</th>
+                                <th>Disabled</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <td>{{userDetails.id}}</td>
+                            <td>{{userDetails.lastLoggedIn | date:'medium'}}</td>
+                            <td>{{userDetails.registrationDate | date:'medium'}}</td>
+                            <td>{{userDetails.authenticationAttempts}}</td>
+                            <td>{{userDetails.channelIndicator}}</td>
+                            <td id="IDStatus">{{activatedAction === true ? "Active" : "Inactive"}}</td>
+                            <td
+                                    class="col-xs-2 searchMargin">
+                                <input ng-disabled="userAccessRights !== 'ROLE_READWRITE_USER'" tooltip="Change the Digital ID status to be Active"
+                                         type="button"
+                                        style="margin: auto; display: block;"
+                                        class="btn btn-primary"
+                                        ng-show="activatedAction === false"
+                                        id="activateBtn"
+                                        ng-model="changedAction"
+                                        value="Activate"
+                                        ng-click="confirmationModal(true, 'Activate', 'Activated', 'Digital ID status will be Activated')">
+                                <input ng-disabled="userAccessRights !== 'ROLE_READWRITE_USER'" tooltip="Change the Digital ID status to be inactive"
+                                        class="btn btn-primary"
+                                       style="margin: auto; display: block;"
+                                       type="button"
+                                       id="deactivateBtn"
+                                       ng-show="activatedAction === true"
+                                       ng-model="changedAction"
+                                       value="Deactivate"
+                                       ng-click="confirmationModal(false, 'Deactivate', 'Activated', 'Digital ID status will be De-Activated')">
+                            </td>
+                            <td id="disabledStatus">{{disabledAction === true ? "Enabled" : "Disabled"}}</td>
+                            <td
+                                    class="col-xs-2 searchMargin">
+                                <input  ng-disabled="userAccessRights !== 'ROLE_READWRITE_USER'"  tooltip="Change the Digital ID to be enabled"
+                                         type="button"
+                                         style="margin: auto; display: block;"
+                                         class="btn btn-primary"
+                                         ng-show="disabledAction === false"
+                                         id="enableBtn"
+                                         ng-model="changedDisabledAction"
+                                         value="Enable"
+                                         ng-click="confirmationModal(true, 'Enable', 'Disabled', 'Digital ID status will be Enabled')">
+                                <input ng-disabled="userAccessRights !== 'ROLE_READWRITE_USER'" tooltip="Change the Digital ID to be disabled"
+                                       class="btn btn-primary"
+                                       style="margin: auto; display: block;"
+                                       type="button"
+                                       id="disableBtn"
+                                       ng-show="disabledAction === true"
+                                       ng-model="changedDisabledAction"
+                                       value="Disable"
+                                       ng-click="confirmationModal(false, 'Disable', 'Disabled', 'Digital ID status will be Disabled')">
+                            </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

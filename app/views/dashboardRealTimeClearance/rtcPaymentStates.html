@@ -1,0 +1,47 @@
+<div class="container-fluid col-md-12 fullWidth">
+    <button ng-click="rtcController.goBackToResults()" class="ui-button"><a>Back to search</a></button>
+    <div class="row" ng-cloak>
+        <div ng-hide="rtcController.paymentDetailsResults" class="top15 col-md-7">No Information available from Payment
+            States
+        </div>
+        <div ng-show="rtcController.paymentDetailsResults" class="col-md-7">
+            <h2><strong>Payment State</strong></h2>
+            <table class="table table-striped">
+                <div>
+                    <thead>
+                    <tr class="bg-info">
+                        <th>To State</th>
+                        <th class="paddingLeft6">Create Date</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="item in rtcController.paymentDetailsResults track by $index">
+                    <td>{{item.toState}}</td>
+                    <td class="paddingLeft5">{{item.creationDate | date:'yyyy-MM-dd HH:mm:ss.sss'}}</td>
+                    </tbody>
+                </div>
+            </table>
+        </div>
+        <div ng-show="rtcController.bolpesResults" class="col-md-5">
+            <h2><strong>BolPes Status</strong></h2>
+            <table class="table table-striped">
+                <div>
+                    <thead>
+                    <tr class="bg-info">
+                        <th>Transaction Id</th>
+                        <th class="paddingLeft">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-repeat="item in rtcController.bolpesResults track by $index">
+                    <td>{{item.transactionId}}</td>
+                    <td class="paddingLeft5"><a ng-href="http://confluence.standardbank.co.za:8060/display/OM/BOLPES+response+error+codes?src=contextnavpagetreemode" target="_blank">{{item.status}}</a></td>
+                    </tbody>
+                </div>
+            </table>
+        </div>
+        <div ng-hide="rtcController.bolpesResults" class="top15">No Information available from Bolpes</div>
+    </div>
+    <div ng-show="rtcController.paymentSearchResults">
+        <div ng-include="'dashboardRealTimeClearance/rtcPaymentResultsFrom.html'" class="paymentsMgLeft"></div>
+        <div ng-include="'dashboardRealTimeClearance/rtcBeneficiaryPaymentResults.html'" class="paymentsMgLeft"></div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+<div ng-controller="OperatorDetailsController" data-ng-init="init()">
+    <ol id="viewDIBreadCrumb" class="breadcrumb text-center lBlue">
+        <li><a href="/dashboard">Search Selection</a></li>
+        <li><a href="/searchSmallEnterpriseOnline" class="active">Search for OBB</a></li>
+        <li><a href="/listEntitlementsDetails" class="active">View OBB Operator Details</a></li>
+        <li href="#" class="active">View operators associated with account</li>
+    </ol>
+    <div class="container-fluid">
+        <div>
+            <h4>Operator associated with account</h4>
+            <div ng-show="errorMessage" id="searchFormError" class="panel-primary alert alert-danger">
+            <strong>{{errorMessage}}</strong>
+            </div>
+            <table class="table table-bordered" id="List">
+                <thead>
+                <tr class="blue">
+                    <th>
+                       Digital Id
+                    </th>
+                    <th>
+                       Card Number
+                    </th>
+                    <th>
+                       Account Number
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{digitalId}}</td>
+                    <td>{{cardNumber | maskedCardNumberFilter}}</td>
+                    <td>{{accountNumber}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered table-striped" id="searchList">
+                <thead>
+                <tr class="bg-info">
+                    <th>
+                        <button id="operatorResultId" ng-click="sortOrder('id')" class="sortButton">
+                            Operator ID
+                        </button>
+                        <span ng-show="predicate === 'id'" ng-class="{reverse:reverse}"></span>
+
+                    </th>
+                    <th>
+                        <button id="operatorFirstName" ng-click="sortOrder('firstName')" class="sortButton">
+                            First Name
+                        </button>
+                        <span ng-show="predicate === 'firstName'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button id="operatorLastName" ng-click="sortOrder('lastName')">
+                           Last Name
+                        </button>
+                        <span ng-show="predicate === 'lastName'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button id="operatorIdentificationType" ng-click="sortOrder('identificationType')" class="sortButton">
+                            Identification type
+                        </button>
+                        <span ng-show="predicate === 'identificationType'" ng-class="{reverse:reverse}"></span>
+
+                    </th>
+                    <th>
+                        <button id="operatorIdentification" ng-click="sortOrder('identification')" class="sortButton">
+                            ID Number
+                        </button>
+                        <span ng-show="predicate === 'identification'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button id="operatorsCellNumber" ng-click="sortOrder('cellphoneNumber')" class="sortButton">
+                            Cell number
+                        </button>
+                        <span ng-show="predicate === 'cellphoneNumber'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button id="operatorActive" ng-click="sortOrder('active')" class="sortButton">
+                           Status
+                        </button>
+                        <span ng-show="predicate === 'active'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                    <th>
+                        <button id="operatorTimeStamp" ng-click="sortOrder('active')" class="sortButton">
+                           Date/Time
+                        </button>
+                        <span ng-show="predicate === 'active'" ng-class="{reverse:reverse}"></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="operatorResult in selectedAccountOperators.operators.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage)) | orderBy:predicate:reverse">
+                    <td><a href="" id="operatorId" tooltip="Select Operator for Role name and description"
+                           ng-click="viewOperatorsRoles(operatorResult.operatorHistory[0].operator.id)">{{operatorResult.operatorHistory[0].operator.id}}</a></td>
+                    <td>{{operatorResult.operatorHistory[0].operator.person.firstName}}</td>
+                    <td>{{operatorResult.operatorHistory[0].operator.person.lastName}}</td>
+                    <td>{{operatorResult.operatorHistory[0].operator.person.identificationType}}</td>
+                    <td>{{operatorResult.operatorHistory[0].operator.person.identification}}</td>
+                    <td>{{operatorResult.operatorHistory[0].operator.person.cellphoneNumber}}</td>
+                    <td>{{operatorResult.operatorCurrentDetail.active === true ? "Active" : "De-active"}}</td>
+                    <td>{{operatorResult.operatorHistory[0].dateTimeStamp | date:'medium'}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div id="paginationID" ng-show='selectedAccountOperators.operators.length > 5'>
+                <pagination
+                        ng-model="currentPage"
+                        total-items="selectedAccountOperators.operators.length"
+                        max-size="maxSize"
+                        items-per-page="itemsPerPage"
+                        boundary-links="true">
+                </pagination>
+            </div>
+        </div>
+    </div>
+</div>

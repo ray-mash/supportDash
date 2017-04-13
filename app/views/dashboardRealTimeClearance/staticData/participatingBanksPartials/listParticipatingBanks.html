@@ -1,0 +1,61 @@
+<div class="col-md-7">
+    <table class="table table-bordered top15">
+        <thead>
+        <tr class="bg-info">
+            <th class="col-sm-1">Bank Name</th>
+            <th class="col-sm-1">BIC</th>
+            <th class="col-sm-1">Code</th>
+            <th class="col-sm-1" ng-show="staticController.updatingParticipatingBanks">Edit</th>
+            <th class="col-sm-1" ng-show="staticController.updatingParticipatingBanks">Delete</th>
+        </tr>
+        <tr>
+            <td><input type="text" ng-model="staticController.searchFilter.name" class="form-control"
+                       placeholder="Search by Bank name" data-ng-change="staticController.banksFilterChange()"></td>
+            <td><input type="text" ng-model="staticController.searchFilter.bic" class="form-control"
+                       placeholder="Search by BIC" data-ng-change="staticController.banksFilterChange()"></td>
+            <td><input type="text" ng-model="staticController.searchFilter.code" class="form-control"
+                       placeholder="Search by Code" data-ng-change="staticController.banksFilterChange()"></td>
+            <th class="col-sm-1"  ng-show="staticController.updatingParticipatingBanks"></th>
+            <th class="col-sm-1"  ng-show="staticController.updatingParticipatingBanks"></th>
+        </tr>
+
+        </thead>
+        <tbody ng-repeat="bank in (staticController.filteredItems = (staticController.participatingBanks |
+        filter:staticController.searchFilter)).slice(((staticController.currentPage-1)*staticController.itemPerPage),
+         ((staticController.currentPage)*staticController.itemPerPage))">
+        <td class="col-sm-1">{{bank.name}}</td>
+        <td class="col-sm-1">{{bank.bic}}</td>
+        <td class="col-sm-1">{{bank.code}}</td>
+        <td id="editBankBtn{{$index}}" class="col-xs-1" ng-show="staticController.updatingParticipatingBanks" ng-click="staticController.openModalForEditParticipatingBanks(bank)">
+            <a><i class="glyphicon glyphicon-pencil"></i>edit</a></td>
+        <td id="deleteBankBtn{{$index}}" class="col-xs-1" ng-show="staticController.updatingParticipatingBanks" ng-click="staticController.openModalForDeleteParticipatingBank(bank)">
+            <a><i class="glyphicon glyphicon-trash"></i>delete</a></td>
+        </tbody>
+    </table>
+    <div>
+        <button ng-show="staticController.userAccessRights === 'ROLE_READWRITE_USER' && !staticController.updatingParticipatingBanks"
+                id="updateParticipatingBanks" tooltip="Add/Edit/Delete participating Bank"
+                class="btn btn-primary btn-block searchButtonSmallScreen" ng-click="staticController.updateParticipatingBanks()">
+            Update
+        </button>
+        <div>
+        <button ng-show="staticController.updatingParticipatingBanks" id="createParticipatingBanks"
+                class="btn btn-primary searchButtonSmallScreen"
+                ng-click="staticController.openModalForCreateParticipatingBank()">
+            Add
+        </button>
+        <button ng-show="staticController.updatingParticipatingBanks" id="cancelParticipatingBanks"
+                class="btn btn-primary searchButtonSmallScreen"
+                 ng-click="staticController.cancelUpdateParticipatingBanks()">
+            Cancel
+        </button>
+    </div>
+        <pagination
+                ng-model="staticController.currentPage"
+                total-items="staticController.filteredItems.length"
+                max-size="staticController.maxSize"
+                items-per-page="staticController.itemPerPage"
+                boundary-links="true">
+        </pagination>
+</div>
+</div>

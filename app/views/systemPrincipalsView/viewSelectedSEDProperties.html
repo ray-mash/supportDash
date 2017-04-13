@@ -1,0 +1,44 @@
+<form>
+    <p id="userNameOST">Selected SED details for: <strong>{{userDetails.userName}}</strong></p>
+    <p id="preferredName">Preferred Name: <strong>{{userDetails.preferredName}}</strong></p>
+    <div class="row row-centered container-fluid">
+        <div class="col-centered">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="bg-info">
+                        <th>Type</th>
+                        <th>Version</th>
+                        <th>ID</th>
+                        <th>Profile Style Type</th>
+                        <th>Channel Profile ID</th>
+                        <th>Territory</th>
+                        <th>Re-Validate</th>
+                        <th>Business Id</th>
+                        <th>Operator Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td id="sedPrincipalType">{{selectedBankingPrincipals.type}}</td>
+                    <td>{{selectedBankingPrincipals.version}}</td>
+                    <td>{{selectedBankingPrincipals.id}}</td>
+                    <td>{{selectedBankingPrincipals.profileStyleType}}</td>
+                    <td>{{selectedBankingPrincipals.channelProfileId}}</td>
+                    <td>{{selectedBankingPrincipals.territory}}</td>
+                    <td>{{selectedBankingPrincipals.revalidate  === true ? "Yes" : "No"}}</td>
+                    <td id="sedPrincipalBusinessId">{{selectedBankingPrincipals.businessId}}</td>
+                    <td id="sedoperatorId">{{selectedBankingPrincipals.operatorId}}</td>
+
+                </tbody>
+            </table>
+        </div>
+    </div>  
+    <div><a id="viewLinkedDIOSTs" href="" tooltip="More Digital ID's linked to Principal"
+            ng-click="viewExtraLinkedDigitalId(selectedBankingPrincipals.type, selectedBankingPrincipals.profileStyleType, selectedBankingPrincipals.businessId, 'Sed_BusinessId')">
+        View Linked Digital ID's</a>
+    </div>
+    <div>&nbsp;</div>
+    <div id="moreDIsMessage" ng-show="moreDigitalsIdResults === undefined">{{moreDigitalsIdinfo}}</div>
+    <div>
+        <ng-include src="'systemPrincipalsView/moreLinkedDigitalIds.html'"></ng-include>
+    </div>
+</form>

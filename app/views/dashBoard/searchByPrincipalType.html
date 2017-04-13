@@ -1,0 +1,15 @@
+<div data-ng-init="init()">
+    <div ng-show="searchTypes === 'DIGITALID'">
+        <div ng-include="'dashBoard/searchByDigitalID.html'"></div>
+    </div>
+    <div ng-show="searchTypes === 'CARDNO'">
+        <div ng-include="'dashBoard/searchByCardNumber.html'"></div>
+    </div>
+
+    <div ng-show="searchTypes === 'OST'">
+        <div ng-include="'dashBoard/searchByOnlineShareTrading.html'"></div>
+    </div>
+    <div ng-show="searchTypes === 'AUDIT' && userAccessRights === 'ROLE_READWRITE_USER'">
+        <div ng-include="'dashBoard/searchAndViewAuditHistory.html'"></div>
+    </div>
+</div>

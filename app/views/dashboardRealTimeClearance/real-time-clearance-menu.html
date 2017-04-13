@@ -1,0 +1,73 @@
+<div ng-controller="RealTimeClearanceDashBoardController as rtcController" ng-strict-di data-ng-init="rtcController.init()">
+    <ol id="searchByRTCBreadCrumb"class="breadcrumb text-center lBlue">
+        <li><a href="/dashboard">Search Selection</a></li>
+        <li id="searchBreadCrumb" class="active">RTC Dashboard</li>
+    </ol>
+    <div class="container">
+        <div class="row">
+            <a id="staticButton" ng-click="rtcController.showSelectedSearchMode('STATICDATA')"
+               class="btn btn-primary col-lg-3 btn-xlarge-longText">
+                <i class="glyphicon glyphicon-user"></i>
+                <p>Static Data</p>
+            </a>
+            <a id="referenceNumberButton" ng-click="rtcController.showSelectedSearchMode('SEARCHBYREFERENCE')"
+               class="btn btn-primary col-lg-3 btn-xlarge-longText">
+                <i class="glyphicon glyphicon-credit-card"></i>
+                <p>Search by Reference Number</p>
+            </a>
+            <a id="cardNumberButton" ng-click="rtcController.showSelectedSearchMode('SEARCHBYCARDNUMBER', '')"
+               class="btn btn-primary col-lg-3 btn-xlarge-longText">
+                <i class="glyphicon glyphicon-stats"></i>
+                <p>Search By Card Number</p>
+            </a>
+            <a id="accountNumberButton" ng-click="rtcController.showSelectedSearchMode('SEARCHBYACCOUNTNUMBER')"
+               class="btn btn-primary col-lg-3 btn-xlarge-longText">
+                <i class="glyphicon glyphicon-stats"></i>
+                <p>Search By Account Number</p>
+            </a>
+            <a id="pendingPayments" ng-click="rtcController.showSelectedSearchMode('SEARCHPENDINGPAYMENTS')"
+               class="btn btn-primary col-lg-3 btn-xlarge-longText top1">
+                <i class="glyphicon glyphicon-search"></i>
+                <p>Search Pending Payments</p>
+            </a>
+            <a ng-show="rtcController.userAccessRights === 'ROLE_READWRITE_USER'"
+             id="auditLogButton" ng-click="rtcController.showSelectedSearchMode('SEARCHRTCAUDITLOG')"
+               class="btn btn-primary col-lg-3 btn-xlarge-longText top1">
+                <i class="glyphicon glyphicon-book"></i>
+                <p>RTC Audit Log</p>
+            </a>
+        </div>
+        <div ng-show="rtcController.searchType === 'STATICDATA'">
+            <div>
+                <ng-include src="'dashboardRealTimeClearance/staticDataMenu.html'"></ng-include>
+            </div>
+        </div>
+        <div ng-show="rtcController.searchType === 'SEARCHBYREFERENCE'">
+            <div>
+                <ng-include src="'dashboardRealTimeClearance/searchByRTCReference.html'"></ng-include>
+            </div>
+        </div>
+        <div ng-show="rtcController.searchType === 'SEARCHBYCARDNUMBER'">
+            <div>
+                <ng-include src="'dashboardRealTimeClearance/searchByRTCCardNumber.html'"></ng-include>
+            </div>
+        </div>
+        <div ng-show="rtcController.searchType === 'SEARCHBYACCOUNTNUMBER'">
+            <div>
+                <ng-include src="'dashboardRealTimeClearance/searchByRTCAccountNumber.html'"></ng-include>
+            </div>
+        </div>
+        <div ng-show="rtcController.searchType === 'SEARCHPENDINGPAYMENTS'">
+            <div>
+                <ng-include src="'dashboardRealTimeClearance/searchPendingPayments.html'"></ng-include>
+            </div>
+        </div>
+
+        <div ng-show="rtcController.searchType === 'SEARCHRTCAUDITLOG'">
+            <div>
+                <ng-include src="'dashboardRealTimeClearance/searchRTCAuditLog.html'"></ng-include>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

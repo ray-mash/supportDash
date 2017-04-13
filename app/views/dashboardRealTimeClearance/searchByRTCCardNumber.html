@@ -1,0 +1,42 @@
+<div class="top25">
+    <form name="searchForm" ng-submit="rtcController.searchByCardNumber(rtcController.searchValue)"
+          data-toggle="validator">
+        <div class="col-xs-12 input-group" style="margin-left: 15em;">
+            <div class="col-xs-3">
+                <div class="input-append">
+                    <input type="text" class="form-control input-medium search-query" id="findByCardNumber"
+                           ng-model="rtcController.searchValue" placeholder="Search by card number"
+                           autofocus="autofocus"
+                           tabindex="1"
+                           ng-trim="false"
+                           ng-pattern="/^[0-9]{9,18}$/"
+                           required>
+                </div>
+            </div>
+            <div class="col-xs-1">
+                <button data-ng-disabled="searchForm.$invalid" id="searchByCard" type="submit" tabindex="2"
+                        class="btn btn-primary btn-block searchButtonSmallScreen">
+                    Search
+                </button>
+            </div>
+            <div class="col-xs-offset-7">
+                <div class="custom-error" ng-show="searchForm.$invalid">
+                    <span ng-show="searchForm.$error.pattern && searchForm.$pristine"><strong>Invalid card number
+                        format</strong></span></div>
+            </div>
+        </div>
+    </form>
+
+    <div ng-show="rtcController.paymentSearchResults.length > 0">
+        <div ng-include="'dashboardRealTimeClearance/rtcPaymentSearchResults.html'"></div>
+    </div>
+    <!--<div ng-show="rtcController.errorRefMessage" id="paymentError">-->
+    <!--<strong>{{rtcController.errorRefMessage}}</strong>-->
+    <!--</div>-->
+    <div ng-show="rtcController.paymentSearchResults.length === 0" id="noPaymentDetails">
+        <strong>No matching results. Please retry or use another search</strong>
+    </div>
+    <div ng-show="rtcController.showPaymentResults && rtcController.paymentSearchResults">
+        <div ng-include="'dashboardRealTimeClearance/rtcPaymentStates.html'"></div>
+    </div>
+</div>

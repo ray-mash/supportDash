@@ -1,0 +1,119 @@
+<div ng-controller="ViewAuditHistoryController" data-ng-init="init()">
+
+    <div>
+        <ol id="searchByDIBreadCrumb" class="breadcrumb list-inline text-center lBlue">
+            <li><a href="/dashboard">Search Selection</a></li>
+            <li ui-sref-active="" ui-sref-opts="{cache: false,reload: true}" class="active">Search By Digital ID for
+                Audit
+                History
+            </li>
+        </ol>
+        <div class="container-fluid">
+
+            <form name="searchForm" ng-submit="searchIdForHistory(searchValue)" data-toggle="validator">
+                <div ng-show="errorMessage" id="searchFormError" class="loginMargin panel-primary alert alert-danger">
+                    <strong>{{errorMessage}}</strong>
+                </div>
+                <div class="col-xs-12 input-group" style="margin-left: 15em;">
+                    <div class="form-inline">
+                        <div class="col-xs-2">
+                            <a href="" class="customClass" id="searchHintsLink" ng-click="searchHintsModal()">Search
+                                Hints</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="input-append">
+                            <input type="text" class="form-control input-medium search-query" id="historyDigitalId"
+                                   ng-model="searchValue" placeholder="Search history for digitalId"
+                                   autofocus="autofocus"
+                                   tabindex="1"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="col-xs-1">
+                        <button data-ng-disabled="searchForm.$invalid" id="searchHistory" type="submit" tabindex="2"
+                                class="btn btn-primary btn-block searchButtonSmallScreen">
+                            History
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div>&nbsp;</div>
+            <div class="container">
+                <div class="row row-centered">
+                </div>
+                <div class="col-centered">
+                    <form class="form-horizontal" role="form" name="viewForm">
+                        <div>
+                            <table class="table table-bordered" ng-show="historyResults.length > 0">
+                                <thead>
+                                <tr class="bg-info">
+                                    <th>Digital ID</th>
+                                    <th>Registration Date</th>
+                                </tr>
+                                </thead>
+                                <tr ng-repeat="searchResult in historyResults.slice(((currentPage-1)*5), ((currentPage)*5)) | orderBy:predicate:reverse">
+                                    <td><a href="" id="searchRes" tooltip="Select for more details"
+                                           ng-click="searchAuditLog(searchResult.id)">{{searchResult.userName}}</a>
+                                    </td>
+
+                                    <td>{{searchResult.registrationDate | date:'medium'}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div id="paginationID" ng-show='historyResults.length > 5'>
+                                <pagination
+                                        ng-model="currentPage"
+                                        total-items="historyResults.length"
+                                        max-size="maxSize"
+                                        items-per-page="5"
+                                        boundary-links="true">
+                                </pagination>
+                            </div>
+                            <div id="resultsCount">
+                                <h4 ng-show="historyResults.length > 0">{{historyResults.length}} results found</h4>
+                                <h4 ng-show="historyResults.length < 1">No results found</h4>
+                            </div>
+                        </div>
+                        <div id="historyResultsCount">
+                            <h4 ng-show="auditLogs.length > 1">
+                                <pre><strong>Audit History</strong></pre>
+                            </h4>
+                            <h4 ng-show="auditLogs.length < 1">
+                                <pre><strong>No Audit History</strong></pre>
+                            </h4>
+                        </div>
+                        <div ng-show="auditLogs.length > 0">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="bg-info">
+                                    <th>User Name</th>
+                                    <th>Activated</th>
+                                    <th>Disabled</th>
+                                    <th>Revision Number</th>
+                                    <th>Revision Date</th>
+                                    <th>Revision Type</th>
+                                    <th>User Id</th>
+                                    <th>Source Address</th>
+                                </tr>
+
+                                </thead>
+                                <tbody ng-repeat="auditLog in auditLogs">
+                                <td>{{auditLog.userName}}</td>
+                                <td>{{auditLog.activated === true ? "Yes" : "No"}}</td>
+                                <td>{{auditLog.disabled === true ? "Yes" : "No"}}</td>
+                                <td>{{auditLog.revision.revisionNo}}</td>
+                                <td>{{auditLog.revision.revisionDate | date:'medium'}}</td>
+                                <td>{{auditLog.revision.revisionType}}</td>
+                                <td>{{auditLog.revision.userId}}</td>
+                                <td>{{auditLog.revision.sourceAddr}}</td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

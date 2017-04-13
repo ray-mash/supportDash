@@ -1,0 +1,27 @@
+<div  ng-show="rtcController.searchResults" class="col-md-12">
+    <table class="table table-condensed">
+        <thead>
+        <tr class="bg-info">
+            <th>Reference Nr</th>
+            <th>Date/Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in rtcController.paymentSearchResults.slice(((rtcController.currentPage-1)*5), ((rtcController.currentPage)*5))">
+            <td><a href="" id="referenceNumberDetails" tooltip="Select for more details"
+                   ng-click="rtcController.viewSelectedReferenceNumberDetails(item.interchangeId)">{{item.interchangeId}}</a>
+            </td>
+            <td>{{item.reqTimestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="paginationID" ng-show='rtcController.paymentSearchResults.length > 5'>
+        <pagination
+                ng-model="rtcController.currentPage"
+                total-items="rtcController.paymentSearchResults.length"
+                max-size="rtcController.maxSize"
+                items-per-page="5"
+                boundary-links="true">
+        </pagination>
+    </div>
+</div>

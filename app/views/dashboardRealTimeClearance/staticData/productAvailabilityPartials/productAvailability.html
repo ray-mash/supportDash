@@ -1,0 +1,25 @@
+<div class="col-md-7">
+    <table class="table table-bordered top15">
+        <thead>
+        <h5>NOTE: RTC is not available on Sundays and Public Holidays</h5>
+        <tr class="bg-info">
+            <th>Description</th>
+            <th>Start time</th>
+            <th>End time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td id="productAvailabilityDescription">RTC Product Availability</td>
+        <td id="productAvailabilityStartTimes">{{staticController.startTimeMsg}}</td>
+        <td id="productAvailabilityEndTimes">{{staticController.endTimeMsg}}</td>
+        </tbody>
+    </table>
+    <div class="top5">
+        <button ng-show="staticController.userAccessRights === 'ROLE_READWRITE_USER' "
+                id="updateProductAvailability" tooltip="Update product availability"
+                class="btn btn-primary btn-block searchButtonSmallScreen"
+                ng-click="staticController.openModalForUpdateProductAvailability()">
+            Update
+        </button>
+    </div>
+</div>

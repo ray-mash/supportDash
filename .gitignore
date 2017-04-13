@@ -1,0 +1,15 @@
+logs/*
+!.gitkeep
+node_modules/
+app/bower_components/
+tmp
+.DS_Store
+.idea
+.DS_Store
+.idea/
+TODO_Tests
+build/
+chef-Fundamentals
+coverage/
+node_modules/
+testData/

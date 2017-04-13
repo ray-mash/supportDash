@@ -1,0 +1,55 @@
+<div ng-controller="ViewDeviceController" data-ng-init="init()">
+    <div class="container">
+        <div class="row row-centered">
+            <h4>Devices</h4>
+            <div ng-show="errorMessage" id="searchFormError" class="panel-primary alert alert-danger">
+                <strong>{{errorMessage}}</strong>
+            </div>
+            <div class="col-xs-12">
+                <form role="form">
+                    <div class="form-group">
+                        <div id="noDevicesFound" data-ng-show="linkedDevices === undefined">
+                            <strong>No Linked Devices Found</strong>
+                        </div>
+                        <div data-ng-show="linkedDevices !== undefined">
+                            <!--table table-bordered table-striped"-->
+                            <table id="DeviceTable" class="table table-bordered">
+                                <thead>
+                                <tr class="bg-info">
+                                    <th>Registration Status</th>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Device-ID</th>
+                                    <th>Operating System</th>
+                                    <th>OS Version</th>
+                                    <th>Risk Minder ID</th>
+                                    <th>Last Login</th>
+                                    <th>Remove Device</th>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="device in linkedDevices">
+                                <tr>
+                                    <td id="DeviceRegistrationStatus">{{device.deviceRegistrationStatus}}</td>
+                                    <td>{{device.deviceType}}</td>
+                                    <td id="deviceName">{{device.name}}</td>
+                                    <td id="deviceID">{{device.uniqueIndentifier}}</td>
+                                    <td>{{device.operatingSystem}}</td>
+                                    <td>{{device.osVersion}}</td>
+                                    <td>{{device.riskminderId}}</td>
+                                    <td>{{device.lastLoggedIn | date:'medium'}}</td>
+                                    <td>
+                                        <button ng-disabled="userAccessRights !== 'ROLE_READWRITE_USER'" id="removeDeviceBtn" ng-click="openModalForRemoveDevice(device)" type="submit" class="btn btn-primary btn-default"
+                                                tooltip="Unlink device from Digital ID" style="margin: auto; display: block;">
+                                            Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
