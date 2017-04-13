@@ -2,7 +2,7 @@
 
 module.exports = {
 
-    'browserPort': 3000,
+    'browserPort': 9000,
     'UIPort': 3001,
     'serverPort': 3002,
 

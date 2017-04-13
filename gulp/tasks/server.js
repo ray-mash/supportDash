@@ -17,12 +17,12 @@ gulp.task('server', function() {
   // log all requests to the console
   server.use(morgan('dev'));
 
-    var context = ["/di", "/entitlements", "/om", "/om-rtc", "/sbg-ib"];
+    var context = ["/frequencies/deploy"];
 
     var options = {
        // target: 'http://dsbgchop31.standardbank.co.za:443',
        //  target: 'https://dchop35.standardbank.co.za:443',
-       target: 'https://dsbgchop31.standardbank.co.za:443',
+       target: 'http://demoncat.standardbank.co.za/',
         changeOrigin: false,
         secure: false,
         router :{}
